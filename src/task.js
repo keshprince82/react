@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from 'react';
 export default function Task(props){
-const[textvalue]=useState(props.value);
+const[tasks,setTask]=useState();
 
     return (
     <div>
         <input
         type="text"
         name="task"
-        value="text"
+        value={props.value}
         />
         </div>
 

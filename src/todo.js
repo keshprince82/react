@@ -3,12 +3,17 @@ import Task from './task.js'
 export default function Todo(){
 
 
-const [textvalue,setText]= useState();
- function addTodo(){
+const [textvalue,setText]= useState({
+    id:1, task:"enter task"
+});
+ function addTodo(e){
+     e.preventDefault();
+    //  ([...textvalue,{id:2,task:"new"}])
 
 }
-function newTask(e){
-    setText(e.textvalue)
+function newTask(){
+    setText(textvalue.task)
+
 }
 
 
@@ -19,14 +24,15 @@ return(
                  <input
                     type="text"
                     name="counter"
-                    value={textvalue}
-                    onChange={(e)=>(newTask(e))}
+                    value={textvalue.task}
+                    onChange={()=>(newTask())}
                     />
 
                     
-                  <button onClick={(addTodo)}>
-                   ADD
+                  <button onClick={<Task />}>
+                   ADD 
                </button>
+               
 
 </div>
 
