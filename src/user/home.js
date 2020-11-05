@@ -1,20 +1,27 @@
 import React from "react";
-import {useState,useEffect,useHistory} from "react";
+import {useState,useEffect} from "react";
 import Add from './add'
-
+import Table from "./table"
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    useHistory
+    
   } from "react-router-dom";
 
   export default function Home(){
       const[users,setUsers]=useState([]);
-      let History=useHistory();
+      
+  const history=useHistory();
+
 return(
+  <>
+  
+  {/* <button onClick={Handleclick}>Adduser</button> */}
     <Router>
-        <Link to ="/Adduser">ADD USER>
+        <Link to ="/Adduser">ADD USER
         </Link>
         <Switch>
             
@@ -29,6 +36,10 @@ return(
             <Edit />
           </Route>
           
+        <Route exact path="/Adduser">
+            <Add add={Newuser}/>
+          </Route>
+          
           
         {/* <button onClick={ ()=>{ hander; History.push("/Adduser") }></button> */}
         
@@ -37,21 +48,33 @@ return(
           
           </Switch>
     </Router>
+    </>
 )
+  
 
 
 function Newuser(user){
-    setUsers(user);
-    localStorage.setItem("user",JSON.stringify(users))
+  console.log(user)
+  // const[usser,setUsser]=useState([]);
+  
+  if(localStorage.getItem("users")!==null){
+   let usser =JSON.parse(localStorage.getItem("users"));
+    usser.push(user)
+    localStorage.setItem("users",JSON.stringify(usser));
+    }
+     else{
+
+     
+    // setUsers(user);
+    localStorage.setItem("users",JSON.stringify([user]))
+     }
     // localStorage.setItem("hey",users)
     
     
 
 }
-function Table(){return(
-    <h1>{users}</h1>)
+  }
 
-}
 function View(){
 
 }
@@ -59,4 +82,4 @@ function Edit(){
 
 }
 
-  }
+  
